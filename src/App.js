@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 const DEFAULT_QUERY = 'redux';
+const DEFAULT_HPP = '100';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
 const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
+const PARAM_PAGE = 'page=';
+const PARAM_HPP = 'hitsPerPage=';
 
 const largeColumn = {
   width: '40%'
@@ -18,9 +21,6 @@ const midColumn = {
 const smallColumn = {
   width: '10%'
 };
-
-const isSearched = searchTerm => item =>
-  item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 const Button = ({ onClick, className, children }) => (
   <button
@@ -84,11 +84,26 @@ class App extends Component {
   }
 
   setSearchTopStories(result) {
-    this.setState({ result });
+    const { hits, page } = result;
+
+    const oldHits = page !== 0 ?
+      this.state.result.hits :
+      [];
+
+    const updateHits = [
+      ...oldHits,
+      ...hits
+    ];
+
+    this.setState({
+      result: { hits: updateHits, page }
+    });
   }
 
-  fetchSearchTopStories(searchTerm) {
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+  fetchSearchTopStories(searchTerm, page = 0) {
+    fetch(
+      `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`
+    )
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
       .catch(error => error);
@@ -100,8 +115,8 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    const updatedHits = this.state.result.hits.filter(item =>
-      item.objectID !== id
+    const updatedHits = this.state.result.hits.filter(
+      item => item.objectID !== id
     );
 
     this.setState({
@@ -123,6 +138,7 @@ class App extends Component {
 
   render() {
     const { result, searchTerm } = this.state;
+    const page = (result && result.page) || 0;
 
     return (
       <div className="page">
@@ -135,13 +151,20 @@ class App extends Component {
             Search
           </Search>
         </div>
-        {result &&
+        {result && (
           <Table
             list={result.hits}
             pattern={searchTerm}
             onDismiss={this.onDismiss}
           />
-        }
+        )}
+        <div className="interactions">
+          <Button
+            onClick={() => this.fetchSearchTopStories(searchTerm, page + 1)}
+          >
+            More
+          </Button>
+        </div>
       </div>
     );
   }
