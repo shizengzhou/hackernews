@@ -13,6 +13,7 @@ import {
 import Button from '../Button';
 import Search from '../Search';
 import Table from '../Table';
+import Loading from '../Loading';
 
 class App extends Component {
   _isMounted = false;
@@ -23,7 +24,8 @@ class App extends Component {
       results: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
-      error: null
+      error: null,
+      isLoading: false
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -51,11 +53,16 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: updateHits, page }
-      }
+      },
+      isLoading: false
     });
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
+    this.setState({
+      isLoading: true
+    });
+
     axios(
       `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`
     )
@@ -115,7 +122,7 @@ class App extends Component {
   }
 
   render() {
-    const { results, searchTerm, searchKey, error } = this.state;
+    const { results, searchTerm, searchKey, error, isLoading } = this.state;
     const page = (results &&
       results[searchKey] &&
       results[searchKey].page
@@ -136,7 +143,9 @@ class App extends Component {
             Search
           </Search>
         </div>
-        {error ?
+        {isLoading ?
+          <Loading /> :
+          error ?
           <div className="interactions">
             <p>Something went wrong.</p>
           </div> :
