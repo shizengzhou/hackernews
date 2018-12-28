@@ -81,9 +81,9 @@ const Table = ({
             <a href={item.url}>{item.title}</a>
           </span>
           <span style={{ width: '30%' }}>{item.author}</span>
-          <span style={{ width: '10%'}}>{item.num_comments}</span>
-          <span style={{ width: '10%'}}>{item.points}</span>
-          <span style={{ width: '10%'}}>
+          <span style={{ width: '10%' }}>{item.num_comments}</span>
+          <span style={{ width: '10%' }}>{item.points}</span>
+          <span style={{ width: '10%' }}>
             <Button
               className="button-inline"
               onClick={() => onDismiss(item.objectID)}
@@ -98,13 +98,16 @@ const Table = ({
 };
 
 Table.propTypes = {
-  list: PropTypes.arrayOf({
-    objectID: PropTypes.string.isRequired,
-    author: PropTypes.string,
-    url: PropTypes.string,
-    num_comments: PropTypes.number,
-    points: PropTypes.number
-  }).isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      objectID: PropTypes.string.isRequired,
+      author: PropTypes.string,
+      url: PropTypes.string,
+      title: PropTypes.string,
+      num_comments: PropTypes.number,
+      points: PropTypes.number
+    })
+  ).isRequired,
   onDismiss: PropTypes.func.isRequired
 }
 
