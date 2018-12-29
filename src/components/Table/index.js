@@ -96,7 +96,7 @@ export default class Table extends Component {
         {reverseSortedList.map(item => (
           <div className="table-row" key={item.objectID}>
             <span style={{ width: '40%' }}>
-              <a href={item.url}>{item.title}</a>
+              <a href={item.url} title={item.title}>{item.title}</a>
             </span>
             <span style={{ width: '30%' }}>{item.author}</span>
             <span style={{ width: '10%' }}>{item.num_comments}</span>
