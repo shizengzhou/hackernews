@@ -109,6 +109,6 @@ Table.propTypes = {
     })
   ).isRequired,
   onDismiss: PropTypes.func.isRequired
-}
+};
 
 export default Table;

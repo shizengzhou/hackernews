@@ -37,6 +37,6 @@ describe('Table', () => {
     );
 
     expect(element.find('.table-row').length).toBe(2);
-  })
+  });
 
 });

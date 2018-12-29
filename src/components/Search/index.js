@@ -37,6 +37,6 @@ Search.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
-}
+};
 
 export default Search;
