@@ -41,7 +41,7 @@ class App extends Component {
     const { searchKey, results } = this.state;
 
     const oldHits = results && results[searchKey] ?
-      results.hits :
+      results[searchKey].hits :
       [];
 
     const updateHits = [
