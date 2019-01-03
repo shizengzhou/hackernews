@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(faSpinner);
 
 const Loading = () => (
-  <div style={{ textAlign: 'center', margin: '40px 0'}}>
+  <div style={{ textAlign: 'center', margin: '40px 0' }}>
     <FontAwesomeIcon className="fa-spin fa-3x" icon="spinner" />
   </div>
 );
