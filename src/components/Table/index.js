@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Button from '../Button';
-import { SORTS } from '../../constants';
+import PropTypes from 'prop-types';
+import { SORTS } from './../../constants';
+import classNames from 'classnames';
 
-const Sort = ({
-  sortKey, onSort, activeSortKey, children,
-}) => {
+const Sort = ({ sortKey, onSort, activeSortKey, children }) => {
   const sortClass = classNames(
     'button-inline',
-    { 'button-active': sortKey === activeSortKey },
+    { 'button-active': sortKey === activeSortKey }
   );
 
   return (
@@ -28,20 +26,19 @@ export default class Table extends Component {
 
     this.state = {
       sortKey: 'NONE',
-      isSortReverse: false,
+      isSortReverse: false
     };
 
     this.onSort = this.onSort.bind(this);
   }
 
   onSort(sortKey) {
-    this.setState((state) => {
-      const isSortReverse = state.sortKey === sortKey && !state.isSortReverse;
+    const isSortReverse = this.state.sortKey === sortKey &&
+      !this.state.isSortReverse;
 
-      return {
-        sortKey,
-        isSortReverse,
-      };
+    this.setState({
+      sortKey,
+      isSortReverse
     });
   }
 
@@ -49,16 +46,16 @@ export default class Table extends Component {
     const { list, onDismiss } = this.props;
     const { sortKey, isSortReverse } = this.state;
     const sortedList = SORTS[sortKey](list);
-    const reverseSortedList = isSortReverse
-      ? sortedList.reverse()
-      : sortedList;
+    const reverseSortedList = isSortReverse ?
+      sortedList.reverse() :
+      sortedList;
 
     return (
       <div className="table">
         <div className="table-header">
           <span style={{ width: '40%' }}>
             <Sort
-              sortKey="TITLE"
+              sortKey={'TITLE'}
               onSort={this.onSort}
               activeSortKey={sortKey}
             >
@@ -67,7 +64,7 @@ export default class Table extends Component {
           </span>
           <span style={{ width: '30%' }}>
             <Sort
-              sortKey="AUTHOR"
+              sortKey={'AUTHOR'}
               onSort={this.onSort}
               activeSortKey={sortKey}
             >
@@ -76,7 +73,7 @@ export default class Table extends Component {
           </span>
           <span style={{ width: '10%' }}>
             <Sort
-              sortKey="COMMENTS"
+              sortKey={'COMMENTS'}
               onSort={this.onSort}
               activeSortKey={sortKey}
             >
@@ -85,7 +82,7 @@ export default class Table extends Component {
           </span>
           <span style={{ width: '10%' }}>
             <Sort
-              sortKey="POINTS"
+              sortKey={'POINTS'}
               onSort={this.onSort}
               activeSortKey={sortKey}
             >
@@ -119,13 +116,6 @@ export default class Table extends Component {
   }
 }
 
-Sort.propTypes = {
-  sortKey: PropTypes.string.isRequired,
-  onSort: PropTypes.func.isRequired,
-  activeSortKey: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
-
 Table.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({
@@ -134,8 +124,8 @@ Table.propTypes = {
       url: PropTypes.string,
       title: PropTypes.string,
       num_comments: PropTypes.number,
-      points: PropTypes.number,
-    }),
+      points: PropTypes.number
+    })
   ).isRequired,
-  onDismiss: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func.isRequired
 };

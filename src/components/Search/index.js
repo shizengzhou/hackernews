@@ -13,7 +13,7 @@ class Search extends Component {
       value,
       onChange,
       onSubmit,
-      children,
+      children
     } = this.props;
 
     return (
@@ -22,7 +22,7 @@ class Search extends Component {
           type="text"
           value={value}
           onChange={onChange}
-          ref={(el) => { this.input = el; }}
+          ref={el => this.input = el}
         />
         <button type="submit">
           {children}
@@ -36,7 +36,7 @@ Search.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default Search;
