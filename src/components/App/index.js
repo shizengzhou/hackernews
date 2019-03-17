@@ -154,9 +154,8 @@ class App extends Component {
             Search
           </Search>
         </div>
-        {isLoading ?
-          <Loading /> :
-          error ?
+        {isLoading ? <Loading /> : ''}
+        {error ?
           <div className="interactions">
             <p>Something went wrong.</p>
           </div> :
