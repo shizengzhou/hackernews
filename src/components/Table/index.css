@@ -1,0 +1,85 @@
+.table {
+  margin: 20px 0;
+}
+
+.table-header {
+  display: flex;
+  line-height: 24px;
+  font-size: 16px;
+  padding: 10px;
+  justify-content: space-between;
+  background-color: #fff;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.table-empty {
+  margin: 200px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.table-row {
+  display: flex;
+  line-height: 24px;
+  white-space: nowrap;
+  padding: 10px;
+  background: #fff;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-header > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+
+.table-row > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 2px;
+}
+
+.button-inline {
+  border-width: 0;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
+  -webkit-font-smoothing: inherit;
+  padding: 0;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.button-active {
+  border-radius: 0;
+  border-bottom: 1px solid #38BB6C;
+}
+
+.title {
+  width: 40%;
+  min-width: 32px;
+}
+
+.author {
+  width: 30%;
+  min-width: 49px;
+}
+
+.comments {
+  width: 10%;
+  min-width: 79px;
+}
+
+.points {
+  width: 10%;
+  min-width: 45px;
+}
+
+.archive {
+  width: 10%;
+  min-width: 56px;
+}

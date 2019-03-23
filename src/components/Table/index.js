@@ -3,6 +3,7 @@ import Button from '../Button';
 import PropTypes from 'prop-types';
 import { SORTS } from './../../constants';
 import classNames from 'classnames';
+import './index.css';
 
 const Sort = ({ sortKey, onSort, activeSortKey, children }) => {
   const sortClass = classNames(
@@ -53,7 +54,7 @@ export default class Table extends Component {
     return (
       <div className="table">
         <div className="table-header">
-          <span style={{ width: '40%' }}>
+          <span className="title">
             <Sort
               sortKey={'TITLE'}
               onSort={this.onSort}
@@ -62,7 +63,7 @@ export default class Table extends Component {
               Titel
             </Sort>
           </span>
-          <span style={{ width: '30%' }}>
+          <span className="author">
             <Sort
               sortKey={'AUTHOR'}
               onSort={this.onSort}
@@ -71,7 +72,7 @@ export default class Table extends Component {
               Author
             </Sort>
           </span>
-          <span style={{ width: '10%' }}>
+          <span className="comments">
             <Sort
               sortKey={'COMMENTS'}
               onSort={this.onSort}
@@ -80,7 +81,7 @@ export default class Table extends Component {
               Comments
             </Sort>
           </span>
-          <span style={{ width: '10%' }}>
+          <span className="points">
             <Sort
               sortKey={'POINTS'}
               onSort={this.onSort}
@@ -89,19 +90,19 @@ export default class Table extends Component {
               Points
             </Sort>
           </span>
-          <span style={{ width: '10%' }}>
+          <span className="archive">
             Archive
           </span>
         </div>
         {reverseSortedList.map(item => (
           <div className="table-row" key={item.objectID}>
-            <span style={{ width: '40%' }}>
+            <span className="title">
               <a href={item.url} title={item.title}>{item.title}</a>
             </span>
-            <span style={{ width: '30%' }}>{item.author}</span>
-            <span style={{ width: '10%' }}>{item.num_comments}</span>
-            <span style={{ width: '10%' }}>{item.points}</span>
-            <span style={{ width: '10%' }}>
+            <span className="author">{item.author}</span>
+            <span className="comments">{item.num_comments}</span>
+            <span className="points">{item.points}</span>
+            <span className="archive">
               <Button
                 className="button-inline"
                 onClick={() => onDismiss(item.objectID)}
