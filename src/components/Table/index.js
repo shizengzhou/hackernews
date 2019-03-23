@@ -60,7 +60,7 @@ export default class Table extends Component {
               onSort={this.onSort}
               activeSortKey={sortKey}
             >
-              Titel
+              Title
             </Sort>
           </span>
           <span className="author">
